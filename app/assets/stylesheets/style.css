@@ -122,6 +122,12 @@ input[type="checkbox"] {
     padding-right: 5px;
 }
 
+
+.simbol-icon{
+    width: 50px;
+    height: 45px;
+}
+
 @font-face {
 	font-family: 'Lemon';
     src: url(/Users/yu-mi/projects/portfolio/app/assets/images/material/LEMONCHI.ttf);
