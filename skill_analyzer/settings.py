@@ -55,7 +55,7 @@ ROOT_URLCONF = 'skill_analyzer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # リスト内にテンプレートディレクトリを指定
+        'DIRS': [os.path.join(BASE_DIR, 'data_analysis/templates')],  # リスト内にテンプレートディレクトリを指定
         'APP_DIRS': True,  # アプリ内のテンプレートディレクトリを有効化
         'OPTIONS': {
             'context_processors': [
