@@ -7,15 +7,12 @@
   <meta name="description" content="">
   <meta name="author" content="SAMURAI ENGINEER">
   <title>{% block title %}{% endblock %}</title>
-  <!-- bootstrap.min.cssの読み込み -->
+
  <!-- BootstrapのCSSの読み込み -->
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
- 
-  <!-- bootstrap.bundle.min.jsの読み込み -->
  <!-- BootstrapのJavaScriptライブラリの読み込み -->
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous" defer>
   </script>
-
   <!-- Google Font読み込み -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
@@ -25,11 +22,122 @@
     integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
   <!-- 今回作成する styles.cssの読み込み -->
   <link href="static/style.css" rel="stylesheet">
-  <!--  -->
 </head>
 <body>
     <div class="container">
-        {% block content %}{% endblock %}
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+              <a class="navbar-brand my_navbar_brand">
+                <img class="img-fluid navbar_brand_logo" src="static/images/site_logo.png" alt="サイトアイコン"><span>My portfolio</span>
+              </a>
+              <div class="navbar-toggler hamburger_menu" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <input type="checkbox" id="hamburger_btn_check">
+                <label for="hamburger_btn_check" class="hamburger_btn">
+                  <img class="btn_open" src="static/images/button_open.png" alt="ナビゲーションバーのボタン">
+                  <img class="btn_close" src="static/images/button_close.png" alt="ナビゲーションバーのボタン">
+                </label>
+              </div>
+              <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item px-2">
+                    <a class="nav-link my_nav_link my-2" aria-current="page" href="#">HOME</a>
+                  </li>
+       
+                  <li class="nav-item px-2">
+                    <a class="nav-link my_nav_link my-2" href="{% url 'about' %}">ABOUT ME</a>
+                  </li>
+       
+                  <li class="nav-item px-2">
+                    <a class="nav-link my_nav_link my-2" href="#gallery">skill analyzar</a>
+                  </li>
+       
+                  <li class="nav-item px-2">
+                    <a class="nav-link my_nav_link my-2" href="#menu">Chat bot</a>
+                  </li>
+       
+                  <li class="nav-item px-2">
+                    <a class="nav-link my_nav_link my-2" href="#review">extra skill1</a>
+                  </li>
+       
+                  <li class="nav-item px-2">
+                    <a class="nav-link my_nav_link my-2" href="#access">extra skill2</a>
+                  </li>
+                    
+                </ul>
+              </div>
+            </div>
+          </nav>
+       <!-- ナビゲーションバー終了 -->
+{% block content %}{% endblock %}
+ <!-- フッター開始 -->
+ <footer id="footer">
+    <div class="container">
+      <div class="row">
+
+        <!-- 2カラムに分けたレイアウトの左側カラム -->
+        <div class="col-12 col-lg-6 position-relative">
+
+          <!-- 左側カラムのレイアウトをさらに分けるためにrowを使用 -->
+          <div class="row pt-5">
+
+            <!-- 画面をさらに2:10に分割 -->
+            <!-- ここは2:10の2の部分 -->
+            <div class="col-lg-2 text-center my-3">
+
+              <!-- サイトロゴ -->
+              <img class="img-fluid footer_brand_logo" src="static/images/site_logo.png" alt="サンプル画像">
+            </div>
+
+            <!-- ここは2:10の10の部分 -->
+            <div class="col-lg-10 align-self-center my-3">
+              <!-- タイトル文字 -->
+              <h2 class="m-0 footer_text">SAMURAI</h2>
+            </div>
+          </div>
+
+          <!-- 営業時間などのテキストを追加 -->
+          <div class="restaurant_info py-3">
+            <div class="d-flex mb-3">
+              <img src="static/images/icon-Marker.png" alt="marker">
+              <p class="p-0 m-0">東京都渋谷区道玄坂2丁目11-1Gスクエア渋谷道玄坂4F</p>
+            </div>
+            <div class="d-flex mb-3">
+              <img src="static/images/icon-Clock.png" alt="clock">
+              <p class="p-0 m-0">12:00-22:00&nbsp;&nbsp;(定休日：火曜日、水曜日)</p>
+            </div>
+            <div class="d-flex mb-3">
+              <img src="static/images/icon-Phone.png" alt="phone">
+              <p class="p-0 m-0">03-1234-5678</p>
+            </div>
+            <div class="d-flex mb-3">
+              <img src="static/images/icon-Mail.png" alt="mail">
+              <p class="p-0 m-0">test@example.com</p>
+            </div>
+          </div>
+
+          <!-- コピーライトを追加 -->
+          <div class="copy_right align-items-center">
+            <p>
+              ©SAMURAI KITCHEN, All Rights Reserved.
+            </p>
+
+            <!-- SNSアイコンを表示 -->
+            <img src="static/images/icon-facebook.png" class="sns_img" alt="facebook">
+            <img src="static/images/icon-twitter.png" class="sns_img" alt="twitter">
+          </div>
+        </div>
+
+        <!-- 2カラムに分けたレイアウトの右側カラム -->
+        <div class="col-lg-6 d-none d-lg-block">
+          <!-- 背景画像を表示 -->
+          <img src="static/images/background-footer.jpg" alt="背景画像">
+        </div>
+      </div>
+    </div>
+   </footer>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous" defer></script>
+
     </div>
 </body>
 </html>
