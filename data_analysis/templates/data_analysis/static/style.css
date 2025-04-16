@@ -2,14 +2,14 @@
 .navbar_brand_logo {
 
     /* サイズを32pxの正方形へ変更 */
-    width: 32px;
-    height: 32px;
+    width: 35x;
+    height: 35px;
   
     /* imgはインライン要素なのでインラインブロックに設定 */
     display: inline-block;
   
-    /* "SAMURAI KITCHEN" 文字との空白を15pxに設定 */
-    margin-right: 15px;
+    /* "SAMURAI KITCHEN" 文字との空白を5pxに設定 */
+    margin-right: 5px
   
   }
   
@@ -68,11 +68,6 @@
   }
     
 
-  /* 疑似要素でアイコンを配置。前に配置しています */
-  .my_carousel_caption::before {
-    content: url(images/logoSymbol_White.png);
-    display: block;
-  }
 
 
 /* スマートフォン画面幅（画面幅が最大375pxまで）の場合、以下のスタイルを適用。 */
@@ -240,6 +235,8 @@
   background-color: #FAFAFA;
 }
 
+
+
 /* position:　absoluteで下からの距離で固定 */
 .copy_right {
   font-size: 14px;
@@ -266,10 +263,20 @@
   height: 24px;
   width: 24px;
 
+
+
   /* 右方向へ余白10px */
   margin-right: 10px;
   margin-top: 0;
 }
+
+.sns_img {
+  width: 25px !important;
+  height: 25px !important;
+  margin: 5px !important;
+  transition: transform 0.3s ease !important;
+}
+
 /* ----------------------------------------------- フッター */
 /* これ以前のコードは編集しないため省略しています */
 

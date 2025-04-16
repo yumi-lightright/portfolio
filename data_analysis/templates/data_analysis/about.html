@@ -1,1 +1,55 @@
-aaa
+{% extends "data_analysis/base.html" %}
+{% block title %}About me{% endblock %}
+{% load static %}
+
+{% block content %}
+    <!--idにはaboutを設定 -->
+    <section id="about">
+        <!--コンテンツの中央揃え。上下方向にパディング（サイズ5）。下方向にマージン（サイズ5）。 -->
+        <div class="container py-5 mb-5">
+          <!-- rowクラス（行） -->
+          <div class="row">
+            <!-- 左側カラム（6/12分割） -->
+            <div class="col-lg-6 text-left">
+              <!-- 上下方向にパディング（サイズ5） -->
+              <div class="py-5">
+                <!-- 下方向にマージン（サイズ5） -->
+                <h2 class="section_title about mb-5">
+                  About me
+                </h2>
+                <!-- 下方向にマージン（サイズ2） -->
+                <h5 class="resume mb-2">
+                    (経歴)
+                </h5>
+                <p class="mb-2">
+                  国立大学院中退後、国際協力系コンサルタント会社に就職退社後<br>
+                  知財事務所にて弁理士を目指し勉強中、自身の事務を簡略化できないかとVBAでプログラミングする<br>
+                  プログラムに楽しさと将来性を感じ、また忙しく働く中、フリーランスという働き方に魅力を感じ、
+                  プログラミングスクールのフリーランスコースを受講、３ケ月のRuby&nbsp;on &nbsp;rails受講期間中、
+                　
+                  <br>
+                </p>
+   
+                <!-- 下方向にマージン（サイズ2） -->
+                <p class="mb-2">
+                  料理に合うワインもイタリア産のものから国産のものまでラインナップ豊富。<br>
+                </p>
+   
+                <!-- 下方向にマージン（サイズ2） -->
+                <p class="mb-2">
+                  イタリアのワインの名産地「ピエモンテ州」「ヴェネト州」で生産された<br>
+                  ワインを取り揃え、上品な味わいをお愉しみいただけます。<br>
+                </p>
+              </div>
+            </div>
+   
+            <!-- 右側カラム（6/12分割） -->
+            <div class="col-lg-6">
+   
+              <!-- 画像を配置 -->
+              <img src="{% static 'images/img-about-us.png' %}" class="img-fluid" alt="pizza">
+            </div>
+          </div>
+        </div> 
+    </section>
+{% endblock %}

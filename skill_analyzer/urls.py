@@ -21,8 +21,8 @@ from data_analysis.views import TopView, home, about, skillanalyzar
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.TopView.as_view(), name="home"),       # トップページ
+    path('', views.TopView.as_view(), name="top"),       # トップページ
     path('base/', home, name="base_template"),            # ベーステンプレートビュー
-    path('top/about/', views.about, name="about"),        # Aboutページ
-    path('top/skillanalyzar/', views.skillanalyzar, name="skillanalyzar"),  # スキル分析ページ
+    path('about/', views.about, name="about"),        # Aboutページ
+    path('skillanalyzar/', views.skillanalyzar, name="skillanalyzar"),  # スキル分析ページ
 ]

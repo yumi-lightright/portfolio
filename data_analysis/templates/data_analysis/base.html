@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="ja">
 <head>
@@ -5,7 +6,7 @@
  <!-- マルチデバイス対応 -->
  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
-  <meta name="author" content="SAMURAI ENGINEER">
+  <meta name="author" content="My port">
   <title>{% block title %}{% endblock %}</title>
 
  <!-- BootstrapのCSSの読み込み -->
@@ -21,21 +22,23 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
     integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
   <!-- 今回作成する styles.cssの読み込み -->
-  <link href="static/style.css" rel="stylesheet">
+  <link href="{% static 'style.css' %}"rel="stylesheet">
+  {% load static %}
+
 </head>
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
               <a class="navbar-brand my_navbar_brand">
-                <img class="img-fluid navbar_brand_logo" src="static/images/site_logo.png" alt="サイトアイコン"><span>My portfolio</span>
+                <img class="img-fluid navbar_brand_logo" src="{% static 'images/site_logo.png' %}" alt="サイトアイコン"><span>My portfolio</span>
               </a>
               <div class="navbar-toggler hamburger_menu" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <input type="checkbox" id="hamburger_btn_check">
                 <label for="hamburger_btn_check" class="hamburger_btn">
-                  <img class="btn_open" src="static/images/button_open.png" alt="ナビゲーションバーのボタン">
-                  <img class="btn_close" src="static/images/button_close.png" alt="ナビゲーションバーのボタン">
+                  <img class="btn_open" src="{% static 'images/button_open.png' %}" alt="ナビゲーションバーのボタン">
+                  <img class="btn_close" src="{% static 'images/button_close.png' %}" alt="ナビゲーションバーのボタン">
                 </label>
               </div>
               <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -45,11 +48,11 @@
                   </li>
        
                   <li class="nav-item px-2">
-                    <a class="nav-link my_nav_link my-2" href="{% url 'about' %}">ABOUT ME</a>
+                    <a class="nav-link my_nav_link my-2" href="{% url 'about' %}">About me</a>
                   </li>
        
                   <li class="nav-item px-2">
-                    <a class="nav-link my_nav_link my-2" href="#gallery">skill analyzar</a>
+                    <a class="nav-link my_nav_link my-2" href="#gallery">Skill analyzar</a>
                   </li>
        
                   <li class="nav-item px-2">
@@ -79,65 +82,68 @@
         <div class="col-12 col-lg-6 position-relative">
 
           <!-- 左側カラムのレイアウトをさらに分けるためにrowを使用 -->
-          <div class="row pt-5">
+          <div class="row pt-2">
 
             <!-- 画面をさらに2:10に分割 -->
             <!-- ここは2:10の2の部分 -->
             <div class="col-lg-2 text-center my-3">
 
               <!-- サイトロゴ -->
-              <img class="img-fluid footer_brand_logo" src="static/images/site_logo.png" alt="サンプル画像">
+              <img class="img-fluid footer_brand_logo" src="{% static 'images/site_logo.png' %}" alt="サンプル画像">
             </div>
 
             <!-- ここは2:10の10の部分 -->
             <div class="col-lg-10 align-self-center my-3">
               <!-- タイトル文字 -->
-              <h2 class="m-0 footer_text">SAMURAI</h2>
+              <h2 class="m-0 footer_text">My portfolio</h2>
             </div>
           </div>
 
           <!-- 営業時間などのテキストを追加 -->
-          <div class="restaurant_info py-3">
+          <div class="restaurant_info pt-2 pb-5">
             <div class="d-flex mb-3">
-              <img src="static/images/icon-Marker.png" alt="marker">
-              <p class="p-0 m-0">東京都渋谷区道玄坂2丁目11-1Gスクエア渋谷道玄坂4F</p>
+              <img src="{% static 'images/icon-Marker.png' %}" alt="marker">
+              <p class="p-0 m-0">〒151-8557 東京都渋谷区代々木神園町１−１</p>
             </div>
             <div class="d-flex mb-3">
-              <img src="static/images/icon-Clock.png" alt="clock">
-              <p class="p-0 m-0">12:00-22:00&nbsp;&nbsp;(定休日：火曜日、水曜日)</p>
+              <img src="{% static 'images/icon-Clock.png' %}" alt="clock">
+              <p class="p-0 m-0">12:00-22:00&nbsp;&nbsp;(定休日：土曜日、水曜日)</p>
             </div>
-            <div class="d-flex mb-3">
-              <img src="static/images/icon-Phone.png" alt="phone">
+            <div class="d-flex mb-2">
+              <img src="{% static 'images/icon-Phone.png' %}" alt="phone">
               <p class="p-0 m-0">03-1234-5678</p>
             </div>
-            <div class="d-flex mb-3">
-              <img src="static/images/icon-Mail.png" alt="mail">
+            <div class="d-flex mb-2">
+              <img src="{% static 'images/icon-Mail.png' %}" alt="mail">
               <p class="p-0 m-0">test@example.com</p>
             </div>
           </div>
 
           <!-- コピーライトを追加 -->
-          <div class="copy_right align-items-center">
+          <div class="copy_right align-items-center mt-2 position=absolute bottom-0">
             <p>
-              ©SAMURAI KITCHEN, All Rights Reserved.
+              ©My portfolio, All Rights Reserved.
             </p>
-
             <!-- SNSアイコンを表示 -->
-            <img src="static/images/icon-facebook.png" class="sns_img" alt="facebook">
-            <img src="static/images/icon-twitter.png" class="sns_img" alt="twitter">
+            <a href="https://www.facebook.com/" target="_blank">
+              <img src="{% static 'images/icon-facebook.png' %}" class="sns_img" alt="facebook">
+            </a>
+           <a href="https://twitter.com/" target="_blank">
+              <img src="{% static 'images/icon-twitter.png' %}" class="sns_img" alt="twitter">
+           </a>
           </div>
         </div>
 
         <!-- 2カラムに分けたレイアウトの右側カラム -->
         <div class="col-lg-6 d-none d-lg-block">
-          <!-- 背景画像を表示 -->
-          <img src="static/images/background-footer.jpg" alt="背景画像">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.024369847805!2d139.69675097497932!3d35.67640193024066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188cb79a4c26e5%3A0x8fca893849103f73!2z5piO5rK756We5a6u!5e0!3m2!1sja!2sjp!4v1744814060922!5m2!1sja!2sjp" 
+          width="500" height="300" style="border:0; margin-top:20px; margin-left: 50px; margin-bottom: 20px;"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+         </iframe>
         </div>
       </div>
     </div>
    </footer>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous" defer></script>
-
     </div>
 </body>
 </html>
