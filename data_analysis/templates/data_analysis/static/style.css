@@ -1,3 +1,12 @@
+body {
+  font-family: 'Lora', serif; /* Loraを使用 */
+}
+
+h1, h2, h3 {
+  font-family: 'Noto Sans JP', sans-serif; /* Noto Sans JPを使用 */
+}
+
+
 /* ----------------------------------------------- ナビゲーションメニュー */
 .navbar_brand_logo {
 
@@ -26,9 +35,18 @@
   font-family: 'Lora', serif;
 
   /* フォント色を黒色に設定 */
-  color: #000000 !important;
+  color: #000000;
+  /* カーソルが当たっている時の色を変更 */
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+
 
 }
+
+.my_nav_link:hover {
+  color: #c6f7d1; /* 好きな色を設定 */
+  text-shadow: 0px 0px 3px #79db8e; /* 光のような効果 */
+}
+
 
 /* ハンバーガーのチェックボックスを非表示にする */
 #hamburger_btn_check{
@@ -56,6 +74,7 @@
     display: none;
   }
 
+ 
 
   .my_carousel_caption {
     font-size: 52px !important;
@@ -66,7 +85,7 @@
     font-family: 'Lora', serif !important;
     line-height: 1.5em !important;
   }
-    
+
 
 
 

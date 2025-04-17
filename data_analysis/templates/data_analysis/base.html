@@ -5,9 +5,10 @@
   <meta charset="utf-8">
  <!-- マルチデバイス対応 -->
  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="My port">
-  <title>{% block title %}{% endblock %}</title>
+ <meta name="description" content="仕事を獲得するためにどんな技術を学び、実装できるかをまとめたポートフォリオです">
+ <meta name="author" content="My port">
+ <link rel="icon" href="{% static 'images/site_logo.png' %}" type="image/png">
+ <title>{% block title %}{% endblock %}</title>
 
  <!-- BootstrapのCSSの読み込み -->
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -30,9 +31,11 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-              <a class="navbar-brand my_navbar_brand">
-                <img class="img-fluid navbar_brand_logo" src="{% static 'images/site_logo.png' %}" alt="サイトアイコン"><span>My portfolio</span>
-              </a>
+              <a class="navbar-brand my_navbar_brand" href="{% url 'top' %}">
+                <img class="img-fluid navbar_brand_logo" src="{% static 'images/site_logo.png' %}" alt="サイトアイコン">
+                <span>My portfolio</span>
+            </a>
+         
               <div class="navbar-toggler hamburger_menu" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <input type="checkbox" id="hamburger_btn_check">
@@ -44,7 +47,7 @@
               <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item px-2">
-                    <a class="nav-link my_nav_link my-2" aria-current="page" href="#">HOME</a>
+                    <a class="nav-link my_nav_link my-2" aria-current="page" href="{% url 'top' %}">HOME</a>
                   </li>
        
                   <li class="nav-item px-2">
@@ -103,7 +106,7 @@
           <div class="restaurant_info pt-2 pb-5">
             <div class="d-flex mb-3">
               <img src="{% static 'images/icon-Marker.png' %}" alt="marker">
-              <p class="p-0 m-0">〒151-8557 東京都渋谷区代々木神園町１−１</p>
+              <p class="p-0 m-0">東京都渋谷区</p>
             </div>
             <div class="d-flex mb-3">
               <img src="{% static 'images/icon-Clock.png' %}" alt="clock">
