@@ -7,7 +7,7 @@ h1, h2, h3 {
 }
 
 
-/* ----------------------------------------------- ナビゲーションメニュー */
+/* ナビゲーションメニュー */
 .navbar_brand_logo {
 
     /* サイズを32pxの正方形へ変更 */
@@ -87,6 +87,10 @@ h1, h2, h3 {
   }
 
 
+  /* Topic News */
+.list-group-item{
+  margin: 15px 0;
+}
 
 
 /* スマートフォン画面幅（画面幅が最大375pxまで）の場合、以下のスタイルを適用。 */
@@ -128,15 +132,9 @@ h1, h2, h3 {
     /* フォントサイズ36px */
     font-size: 36px;
   
-    /* フォントの太さ600 標準は400です */
-    font-weight: 600;
-  }
+    }
+    
 
-  
-   /* aboutクラスのあとに"私たちについて"の文字を追加  */
- .about::after {
-    content: "私たちについて";
-  }
 
   /* section_titleに擬似要素を追加 */
  .section_title::after {
@@ -156,15 +154,38 @@ h1, h2, h3 {
     border-bottom: solid 1px #000000;
   }
 
+  /* ギャラリー */
+  .gallery{
+    text-align: center !important;
+  }
+
+  .rounded-window {
+    width: 200px; /* 好きなサイズに調整可能 */
+    height: 250px; /* 縦長の窓 */
+    background-color: #fff; /* 窓の背景色 */
+    border: 3px solid #000; /* 窓枠の線を3pxに細く設定 */
+    border-top-left-radius: 100px; /* 上部の角を丸く */
+    border-top-right-radius: 100px; /* 上部の角を丸く */
+    overflow: hidden; /* 画像が枠からはみ出さないようにする */
+    position: relative; /* 窓枠の位置を調整 */
+  }
+  
+  .img-fluid-1 {
+    width: 100%;
+    height: 100%;
+    position: absolute; /* 窓枠の中に配置 */
+    object-fit: cover; /* 画像を窓枠内にフィット */
+  }
+
+
   #about  {
     background-color: #FFE6A5;
   }
- /* ギャラリー */
-.gallery::after {
-    content: "ギャラリー";
-    margin: 0 auto 0;
-  }
 
+
+
+
+  
   /* メニュー */
 .menu::after {
     content: "メニュー";
@@ -181,7 +202,6 @@ h1, h2, h3 {
     font-weight: 400;
     font-family: 'Lora', serif;
   }
-  /* ----------------------------------------------- レビュー */
   /* ----------------------------------------------- レビュー */
 /* 背景画像を設定 */
 .review_wrapper {
@@ -332,6 +352,26 @@ h1, h2, h3 {
   font-size: 24px;
   font-family: 'Lora', serif;
 }
+
+
+  /* アニメーションの設定 */
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-100%); /* 左からスライドイン */
+      opacity: 0; /* 透明 */
+    }
+    100% {
+      transform: translateX(0); /* 元の位置 */
+      opacity: 1; /* 不透明 */
+    }
+  }
+
+  /* スライドイン効果を適用 */
+  .slide-in {
+    display: inline-block;
+    animation: slideIn 1s ease-out; /* 1秒かけてスライドイン */
+  }
+
 
 /* ----------------------------------------------- フッター */
 /* これ以前のコードは編集しないため省略しています */

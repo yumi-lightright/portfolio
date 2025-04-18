@@ -1,64 +1,45 @@
 import requests
 from bs4 import BeautifulSoup
 
-def fetch_list_page(url, headers=None):
-    """
-    一覧ページからリンクを取得する関数
-    """
+def fetch_html(url, headers):
     try:
         response = requests.get(url, headers=headers)
-        response.raise_for_status()  # ステータスコードを確認
-        soup = BeautifulSoup(response.text, 'html.parser')
-
-        # 一覧ページのリンクを収集
-        links = [link['href'] for link in soup.find_all('a', class_='p-search-job-media__title c-media__title')]
-        base_url = "https://www.lancers.jp"
-        full_links = [base_url + link for link in links]  # 完全なURLを生成
-        return full_links
+        response.raise_for_status()  # HTTPステータスコードが200以外の場合は例外を発生
+        return BeautifulSoup(response.content, "html.parser")
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching list page: {e}")
+        print(f"リクエストエラー: {e}")
         return None
 
-def fetch_detail_page(url, headers=None):
-    """
-    詳細ページから情報を取得する関数
-    """
+def extract_data(soup, tag, class_name):
     try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        soup = BeautifulSoup(response.text, 'html.parser')
+        elements = soup.find_all(tag, {'class': class_name})
+        if not elements:
+            raise Exception(f"指定したクラス'{class_name}'のデータが見つかりませんでした。HTML構造を確認してください。")
+        return [element.text for element in elements]
+    except Exception as e:
+        print(f"データ抽出エラー: {e}")
+        return []
 
-        # タイトルと <dd class="c-definition-list__description"> の内容を取得
-        title = soup.find('h1', class_='c-heading')
-        description_section = soup.find('dd', class_='c-definition-list__description')
-        description = description_section.decode_contents().strip() if description_section else "No description found"
+def main():
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"}
+    
+    # 最初のURLでデータを抽出
+    url1 = "https://freelance-start.com/jobs/skill-3?utm_source=google&utm_medium=cpc&utm_campaign=google_cpc_03-Skill_03-Skill-01-ProgrammingLanguage_20240606&utm_term=b_python%20%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%20%E6%B1%82%E4%BA%BA&RefID=google_cpc_03-Skill_03-Skill-01-ProgrammingLanguage_20240606_b_python%20%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%20%E6%B1%82%E4%BA%BA&gad_source=1&gclid=Cj0KCQjwzYLABhD4ARIsALySuCTrSZ6ZjD8gOS-p3wAywZB-_i6OzXrCDoSE0MeDZqH7IJ9Sx4VCZccaAtjtEALw_wcB"
+    soup1 = fetch_html(url1, headers)
+    if soup1:
+        job_details = extract_data(soup1, 'p', 'text-break-all fs-14')
+        print("ジョブ詳細:")
+        for job in job_details:
+            print(job)
 
-        return {
-            'title': title.text.strip() if title else "No title found",
-            'description': description  # HTML構造を保持して抽出
-        }
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching detail page {url}: {e}")
-        return None
+    # 次のURLでデータを抽出
+    url2 = "https://jp.indeed.com/jobs?q=python+%E3%83%95%E3%83%AB%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88&l=&from=searchOnDesktopSerp&vjk=aead0b930e4cf37a&advn=2245789821892914"
+    soup2 = fetch_html(url2, headers)
+    if soup2:
+        skills = extract_data(soup2, 'button', 'btn btn-sm btn-outline-light-green-gray border-w-1 fs-12 text-dark font-weight-light py-1 px-2')
+        print("\nスキル:")
+        for skill in skills:
+            print(skill)
 
 if __name__ == "__main__":
-    # 一覧ページのURL
-    list_page_url = "https://www.lancers.jp/work/search?keyword=Python&ref=header_search&searchType=recommend&sort=client&work_rank%5B0%5D=2&work_rank%5B1%5D=3&work_rank%5B2%5D=0&show_description=1&page=2"
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
-
-    # 一覧ページからリンクを取得
-    links = fetch_list_page(list_page_url, headers=headers)
-    if links:
-        print(f"Found {len(links)} links:")
-        for link in links:
-            print(link)
-
-        # 各詳細ページの情報を取得
-        for link in links:
-            details = fetch_detail_page(link, headers=headers)
-            print(f"Details for {link}:")
-            print(details)
-    else:
-        print("No links found on the list page.")
+    main()

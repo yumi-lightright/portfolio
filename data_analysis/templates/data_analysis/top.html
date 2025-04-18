@@ -33,7 +33,7 @@
     <img src="{% static 'images/slider-2.jpg' %}" alt="旅">
     <div class="carousel-caption">
       <h1 class="my_carousel_caption">
-        Life&nbsp;Work&nbsp;balance
+        Life&nbsp;Work balance
       </h1>
     </div>
   </div>
@@ -61,16 +61,18 @@
     </a>
   </div>
 </div>
-<ol class="list-group">
-  <h3 class="text-center">Topic News</h3>
+ <!-- Topic News -->
+ <section id="topic_news">
+<ol class="list-group mb-5">
+  <h2 class="mb-3 section_title topic_news text-center slide-in">Topic News</h2>
   <li class="list-group-item" style="border: none;">
     <span class="badge bg-dark" style="color: #ffffff !important;">SNS</span>
     <time datetime="2024-12-06 21:00:00 +0900">
-      <span>2024.12.06</span>
+      <span>2025.04.20</span>
     </time>
     <div>
-      <a href="https://youtu.be/sTMAoA3ugc8" class="text-decoration-none fw-bold" style="color: black;">
-        LOWYA史上最大級！LOWYAイオンモール広島府中店をSHOP TOUR【後編】 動画UP！
+      <a href="https://www.youtube.com/watch?v=L9R2ivKeZtI" class="text-decoration-none fw-bold" style="color: black;">
+        4分でサクッと分かる日本マイクロソフト社長の英語力【ビジネス英語】
       </a>
     </div>
   </li>
@@ -80,16 +82,88 @@
       <span>2024.11.22</span>
     </time>
     <div>
-      <a href="https://youtu.be/YbRWkhdpvAk" class="text-decoration-none fw-bold" style="color: black;">
-        LOWYA史上最大級！LOWYAイオンモール広島府中店をSHOP TOUR【前編】 動画UP！
+      <a href="https://www.youtube.com/watch?v=d6ihrHNNkkY" class="text-decoration-none fw-bold" style="color: black;">
+        Introducing the Google News Initiative
       </a>
     </div>
   </li>
 </ol>
-</li>
-</ol>
+</section>
+<!-- ギャラリーセクション開始 -->
+<section id="gallery">
+  <div class="container mb-5">
+    <h2 class="mb-3 section_title gallery text-center">GALLERY</h2>
+
+    <div class="row">
+      <div class="col-6 col-lg-3 mt-5 mb-4 d-flex justify-content-center">
+        <div class="rounded-window">
+          <img class="img-fluid-1" src="{% static 'images/gallery-1.jpg' %}" alt="桜">
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3 mt-5 mb-4 d-flex justify-content-center">
+        <div class="rounded-window">
+          <img class="img-fluid-1" src="{% static 'images/gallery-2.jpg' %}" alt="桜">
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3 mt-5 mb-4 d-flex justify-content-center">
+        <div class="rounded-window">
+          <img class="img-fluid-1" src="{% static 'images/gallery-3.jpg' %}" alt="桜">
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3 mt-5 mb-4 d-flex justify-content-center">
+        <div class="rounded-window">
+          <img class="img-fluid-1" src="{% static 'images/gallery-4.jpg' %}" alt="桜">
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3 mt-5 mb-4 d-flex justify-content-center">
+        <div class="rounded-window">
+          <img class="img-fluid-1" src="{% static 'images/gallery-5.jpg' %}" alt="桜">
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3 mt-5 mb-4 d-flex justify-content-center">
+        <div class="rounded-window">
+          <img class="img-fluid-1" src="{% static 'images/gallery-6.jpg' %}" alt="桜">
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3 mt-5 mb-4 d-flex justify-content-center">
+        <div class="rounded-window">
+          <img class="img-fluid-1" src="{% static 'images/gallery-7.jpg' %}" alt="桜">
+        </div>
+      </div>
 
 
+      <div class="col-6 col-lg-3 mt-5 mb-4 d-flex justify-content-center">
+        <div class="rounded-window">
+          <img class="img-fluid-1" src="{% static 'images/gallery-8.jpg' %}" alt="桜">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ <!-- アクセスセクション開始 -->
+ <section id="access">
+  <div class="container">
 
+    <div class="row">
+      <div class="col-lg-12 text-center mb-5">
+        <h2 class="section_title text-center access mb-5">ACCESS</h2>
+        <p>JR山手線　渋谷駅より徒歩3分、店舗に隣接した駐車場があります。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mb-5 px-2">
+    <!-- この部分にマップを配置 -->
+    <iframe
+     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12967.114087343349!2d139.687349334065!3d35.657827993593834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f1.1!3m3!1m2!1s0x6018f5209bb80c49%3A0x7abbc1a9d7d575eb!2z5qCq5byP5Lya56S-5L6N!5e0!3m2!1sja!2sjp!4v1623882550231!5m2!1sja!2sjp"
+     class="w-100" style="height: 50vh;" loading="lazy"></iframe>
+  </div>
+ </section>
  {% endblock %}
 
