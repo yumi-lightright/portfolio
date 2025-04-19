@@ -10,7 +10,7 @@ h1, h2, h3 {
 /* ナビゲーションメニュー */
 .navbar_brand_logo {
 
-    /* サイズを32pxの正方形へ変更 */
+    /* サイズを35pxの正方形へ変更 */
     width: 35x;
     height: 35px;
   
@@ -158,6 +158,7 @@ h1, h2, h3 {
   .gallery{
     text-align: center !important;
   }
+
 
   .rounded-window {
     width: 200px; /* 好きなサイズに調整可能 */

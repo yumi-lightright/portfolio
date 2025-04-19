@@ -32,8 +32,8 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container">
               <a class="navbar-brand my_navbar_brand" href="{% url 'top' %}">
-                <img class="img-fluid navbar_brand_logo" src="{% static 'images/site_logo.png' %}" alt="サイトアイコン">
-                <span>My portfolio</span>
+                <img class="img-fluid navbar_brand_logo mt-0" src="{% static 'images/site_logo.png' %}" alt="サイトアイコン">
+                <span class="portfolio-title fs-5">My portfolio</span>
             </a>
          
               <div class="navbar-toggler hamburger_menu" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -82,21 +82,21 @@
       <div class="row">
 
         <!-- 2カラムに分けたレイアウトの左側カラム -->
-        <div class="col-12 col-lg-6 position-relative">
+        <div class="position-relative">
 
           <!-- 左側カラムのレイアウトをさらに分けるためにrowを使用 -->
           <div class="row pt-2">
 
             <!-- 画面をさらに2:10に分割 -->
             <!-- ここは2:10の2の部分 -->
-            <div class="col-lg-2 text-center my-3">
+            <div class="col-lg-12 text-center">
 
               <!-- サイトロゴ -->
-              <img class="img-fluid footer_brand_logo" src="{% static 'images/site_logo.png' %}" alt="サンプル画像">
+              <img class="img-fluid footer_brand_logo" src="{% static 'images/site_logo.png' %}" style="text-align: center;" alt="サンプル画像">
             </div>
 
             <!-- ここは2:10の10の部分 -->
-            <div class="col-lg-10 align-self-center my-3">
+            <div class="text-center">
               <!-- タイトル文字 -->
               <h2 class="m-0 footer_text">My portfolio</h2>
             </div>
@@ -106,17 +106,17 @@
           <div class="restaurant_info pt-2 pb-5">
             <div class="d-flex mb-3">
               <img src="{% static 'images/icon-Marker.png' %}" alt="marker">
-              <p class="p-0 m-0">東京都渋谷区</p>
+              <p class="p-0 m-0">東京都</p>
             </div>
             <div class="d-flex mb-3">
-              <img src="{% static 'images/icon-Clock.png' %}" alt="clock">
+              <img src="{% static 'images/icon-Clock.png' %}" style="margin-top: 2px;" alt="clock">
               <p class="p-0 m-0">12:00-22:00&nbsp;&nbsp;(定休日：土曜日、水曜日)</p>
             </div>
-            <div class="d-flex mb-2">
-              <img src="{% static 'images/icon-Phone.png' %}" alt="phone">
+            <div class="d-flex m-0 p-0">
+              <img src="{% static 'images/icon-Phone.png' %}" style="margin-top: 0%;" alt="phone">
               <p class="p-0 m-0">03-1234-5678</p>
             </div>
-            <div class="d-flex mb-2">
+            <div class="d-flex mt-2 mb-3">
               <img src="{% static 'images/icon-Mail.png' %}" alt="mail">
               <p class="p-0 m-0">test@example.com</p>
             </div>
@@ -137,12 +137,6 @@
           </div>
         </div>
 
-        <!-- 2カラムに分けたレイアウトの右側カラム -->
-        <div class="col-lg-6 d-none d-lg-block">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.024369847805!2d139.69675097497932!3d35.67640193024066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188cb79a4c26e5%3A0x8fca893849103f73!2z5piO5rK756We5a6u!5e0!3m2!1sja!2sjp!4v1744814060922!5m2!1sja!2sjp" 
-          width="500" height="300" style="border:0; margin-top:20px; margin-left: 50px; margin-bottom: 20px;"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-         </iframe>
-        </div>
       </div>
     </div>
    </footer>
