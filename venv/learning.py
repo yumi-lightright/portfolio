@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import csv
+import time
 
 # Chromeドライバのセットアップ
 driver = webdriver.Chrome()
@@ -58,15 +59,30 @@ try:
     except Exception as e:
         print(f"検索処理中にエラーが発生しました: {e}")
 
-    # リンク収集
+    # 無限スクロール + リンク収集
     try:
-        href_list = []  # リンクリストを初期化
-        link_elements = driver.find_elements(By.XPATH, "//a[contains(@href, '/company/')]")
-        for element in link_elements:
-            href_value = element.get_attribute("href")
-            if href_value:  # 有効なリンクのみ追加
-                href_list.append(href_value)
-        print("リンクリストを収集しました！")
+        href_list = set()  # URLを格納するセット（重複排除）
+        last_height = driver.execute_script("return document.body.scrollHeight")  # 現在のページ高さを取得
+
+        while True:
+            # スクロールを実行
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(2)  # ページの読み込みを待つ
+
+            # ページ内のリンクを取得
+            link_elements = driver.find_elements(By.XPATH, "//a[contains(@href, '/company/')]")
+            for element in link_elements:
+                href_value = element.get_attribute("href")
+                if href_value and href_value not in href_list:  # 新しいリンクのみ追加
+                    href_list.add(href_value)
+
+            # ページの高さを再度取得
+            new_height = driver.execute_script("return document.body.scrollHeight")
+            if new_height == last_height:  # 高さが変わらなければ終了
+                break
+            last_height = new_height
+
+        print(f"リンク収集完了！取得したリンク数: {len(href_list)}")
     except Exception as e:
         print(f"リンク収集時にエラーが発生しました: {e}")
 
@@ -105,5 +121,6 @@ try:
         print(f"CSVファイル保存中にエラーが発生しました: {e}")
 
 finally:
+    # ブラウザを閉じる
     driver.quit()
-    print("ブラウザを終了しました！")
+    print("ブラウザを閉じました。")
