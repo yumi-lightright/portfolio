@@ -17,12 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from data_analysis import views
-from data_analysis.views import TopView, home, about, skillanalyzar
+from data_analysis.views import TopView, home, about, skillanalyzer
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.TopView.as_view(), name="top"),       # トップページ
     path('base/', home, name="base_template"),            # ベーステンプレートビュー
     path('about/', views.about, name="about"),        # Aboutページ
-    path('skillanalyzar/', views.skillanalyzar, name="skillanalyzar"),  # スキル分析ページ
+    path('skillanalyzer/', views.skillanalyzer, name="skillanalyzer"),  # スキル分析ページ
 ]

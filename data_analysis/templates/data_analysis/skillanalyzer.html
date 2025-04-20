@@ -1,0 +1,46 @@
+{% extends "data_analysis/base.html" %}
+{% block title %}My portfolio{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="ja">
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <a href="https://www.green-japan.com/mail_verifications/new?lid=head_lnk_reg" class="btn btn-success btn-sm">
+                    こちらよりGREENで会員登録して下さい
+                </a>
+                <!-- カード形式のログインフォーム -->
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4>ログイン</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="/login" method="POST">
+                            <!-- メールアドレス -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com" required>
+                            </div>
+                            <!-- パスワード -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label">パスワード</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="パスワードを入力" required>
+                            </div>
+                            <!-- ボタン -->
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">ログイン</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}

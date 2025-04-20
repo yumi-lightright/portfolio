@@ -11,5 +11,5 @@ def home(request):
 def about(request):
     return render(request, 'data_analysis/about.html')  # Aboutページのテンプレート指定
 
-def skillanalyzar(request):
-    return render(request, 'data_analysis/skillanalyzar.html')  # skillanalyzarページのテンプレート指定
+def skillanalyzer(request):
+    return render(request, 'data_analysis/skillanalyzer.html')  # skillanalyzarページのテンプレート指定

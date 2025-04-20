@@ -393,3 +393,23 @@ h1, h2, h3 {
     line-height: 35px;
   }
 }
+
+/* ユーザフォームを縮小させる */
+
+/* カードサイズをコンパクトに設定 */
+.card {
+  max-height: 450px;
+  max-width: 350px; /* 幅を制限してコンパクトに */
+  padding: 15px;    /* 内側余白を縮小 */
+  margin: auto;     /* センターに配置 */
+}
+.form-control {
+  height: 35px; /* 入力フィールドの高さを縮小 */
+  font-size: 0.9rem; /* フォントサイズを小さく */
+}
+.btn {
+  font-size: 0.9rem; /* ボタンのサイズを調整 */
+  padding: 7px 15px; /* ボタンの内側余白を縮小 */
+}
+
+ 
