@@ -17,12 +17,12 @@ try:
         email_input = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.NAME, "user[mail]"))
         )
-        email_input.send_keys("yt08301192@icloud.com")  # メールアドレスを入力
+        email_input.send_keys("")  # メールアドレスを入力
 
         password_input = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.NAME, "user[password]"))
         )
-        password_input.send_keys("kiyoko09")  # パスワードを入力
+        password_input.send_keys("")  # パスワードを入力
 
         login_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.NAME, "commit"))
