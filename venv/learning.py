@@ -48,7 +48,7 @@ try:
             EC.presence_of_element_located((By.NAME, "user_search[keyword]"))
         )
         search_field.clear()
-        search_field.send_keys("python フルリモート")
+        search_field.send_keys("python") # 検索ワードを入力
         print("検索ワードを入力しました！")
 
         submit_button = WebDriverWait(driver, 10).until(
@@ -101,22 +101,45 @@ try:
             )
             job_description = job_description_element.text
 
-            skills_element = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, ".MuiTypography-root.MuiTypography-body2"))
-            )
+            skills_element = WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.XPATH, 
+             "//p[contains(@class, 'MuiTypography-body2') and (contains(., '必須') or contains(., '求める人物像') or contains(., '開発経験') or contains(., '歓迎条件') or contains(., '必要な資格'))]"
+         ))
+)
+
             skills_description = skills_element.text
+            print(f"仕事内容: {skills_description}")
 
             data_to_save.append([href_value, job_description, skills_description])
         except Exception as e:
             print(f"情報抽出中にエラーが発生しました: {e}")
 
-    # CSVファイルに保存
+   # CSVファイルに分けて保存
     try:
-        with open("job_data.csv", "w", newline="", encoding="utf-8") as csvfile:
-            csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(["リンク", "仕事内容", "必要なスキル・経験"])
-            csvwriter.writerows(data_to_save)
-        print("データをCSVファイルに保存しました！")
+        # リンクの保存
+        with open("links.csv", "w", newline="", encoding="utf-8") as link_file:
+            link_writer = csv.writer(link_file)
+            link_writer.writerow(["リンク"])  # ヘッダー行
+            for row in data_to_save:
+                link_writer.writerow([row[0]])  # リンク列のみ保存
+        print("リンクデータを保存しました: links.csv")
+
+        # 仕事内容の保存
+        with open("job_descriptions.csv", "w", newline="", encoding="utf-8") as job_file:
+            job_writer = csv.writer(job_file)
+            job_writer.writerow(["仕事内容"])  # ヘッダー行
+            for row in data_to_save:
+                job_writer.writerow([row[1]])  # 仕事内容列のみ保存
+        print("仕事内容データを保存しました: job_descriptions.csv")
+
+        # 必要なスキル・経験の保存
+        with open("skills_and_experience.csv", "w", newline="", encoding="utf-8") as skill_file:
+            skill_writer = csv.writer(skill_file)
+            skill_writer.writerow(["必要なスキル・経験"])  # ヘッダー行
+            for row in data_to_save:
+                skill_writer.writerow([row[2]])  # 必要なスキル・経験列のみ保存
+        print("必要なスキル・経験データを保存しました: skills_and_experience.csv")
+
     except Exception as e:
         print(f"CSVファイル保存中にエラーが発生しました: {e}")
 
