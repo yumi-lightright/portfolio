@@ -25,4 +25,5 @@ urlpatterns = [
     path('base/', home, name="base_template"),            # ベーステンプレートビュー
     path('about/', views.about, name="about"),        # Aboutページ
     path('skillanalyzer/', views.skillanalyzer, name="skillanalyzer"),  # スキル分析ページ
+    path('explanation/', views.explanation, name="explanation"),  # 説明ページ
 ]

@@ -13,3 +13,6 @@ def about(request):
 
 def skillanalyzer(request):
     return render(request, 'data_analysis/skillanalyzer.html')  # skillanalyzarページのテンプレート指定
+
+def explanation(request):
+    return render(request, 'data_analysis/explanation.html')  # explanationページのテンプレート指定
