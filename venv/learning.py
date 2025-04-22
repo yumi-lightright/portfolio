@@ -48,7 +48,7 @@ try:
             EC.presence_of_element_located((By.NAME, "user_search[keyword]"))
         )
         search_field.clear()
-        search_field.send_keys("python") # 検索ワードを入力
+        search_field.send_keys("業務効率化") # 検索ワードを入力
         print("検索ワードを入力しました！")
 
         submit_button = WebDriverWait(driver, 10).until(
@@ -133,7 +133,7 @@ try:
         print("仕事内容データを保存しました: csv/仕事内容.csv")
 
         # 必要なスキル・経験の保存
-        with open("skills_and_experience.csv", "w", newline="", encoding="utf-8") as skill_file:
+        with open("csv/skills_and_experience.csv", "w", newline="", encoding="utf-8") as skill_file:
             skill_writer = csv.writer(skill_file)
             skill_writer.writerow(["必要なスキル・経験"])  # ヘッダー行
             for row in data_to_save:
