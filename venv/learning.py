@@ -125,12 +125,12 @@ try:
         print("リンクデータを保存しました: links.csv")
 
         # 仕事内容の保存
-        with open("job_descriptions.csv", "w", newline="", encoding="utf-8") as job_file:
+        with open("csv/仕事内容.csv", "w", newline="", encoding="utf-8") as job_file:
             job_writer = csv.writer(job_file)
             job_writer.writerow(["仕事内容"])  # ヘッダー行
             for row in data_to_save:
                 job_writer.writerow([row[1]])  # 仕事内容列のみ保存
-        print("仕事内容データを保存しました: job_descriptions.csv")
+        print("仕事内容データを保存しました: csv/仕事内容.csv")
 
         # 必要なスキル・経験の保存
         with open("skills_and_experience.csv", "w", newline="", encoding="utf-8") as skill_file:

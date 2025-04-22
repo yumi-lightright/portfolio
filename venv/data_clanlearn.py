@@ -65,9 +65,9 @@ with open('skills_and_experience.csv', newline='', encoding='utf-8') as csvfile:
     求める人物像_writer = csv.writer(求める人物像_file)
 
     # ヘッダーを書き込む
-    必須条件_writer.writerow(['項目'])
-    歓迎条件_writer.writerow(['項目'])
-    求める人物像_writer.writerow(['項目'])
+    必須条件_writer.writerow(['必須条件'])
+    歓迎条件_writer.writerow(['歓迎条件'])
+    求める人物像_writer.writerow(['求める人物像'])
 
     # 各行をカテゴリごとに分けて書き込む
     for row in reader:
@@ -86,60 +86,61 @@ with open('skills_and_experience.csv', newline='', encoding='utf-8') as csvfile:
     歓迎条件_file.close()
     求める人物像_file.close()
 
-# # ファイル名と対応するデータフレーム名を辞書で管理
-# file_paths = {
-#     "job_data": "job_descriptions.csv",
-#     "requisite_data": "必須条件.csv",
-#     "welcome_data": "歓迎条件.csv",
-#     "character_data": "求める人物像.csv",
-# }
+# ファイル名と対応するデータフレーム名を辞書で管理
+file_paths = {
+    "job_data": "csv/仕事内容.csv",
+    "requisite_data": "csv/必須条件.csv",
+    "welcome_data": "csv/歓迎条件.csv",
+    "character_data": "csv/求める人物像.csv",
+}
+
+# CSVファイルを読み込む辞書
+data_frames = {name: pd.read_csv(path) for name, path in file_paths.items()}
 
 
-# # CSVファイルを読み込む辞書
-# data_frames = {name: pd.read_csv(path) for name, path in file_paths.items()}
-
-# # 欠損値を空白で埋める処理
-# data_frames = {name: df.fillna("") for name, df in data_frames.items()}
-
-# # データフレームのアクセス例
-# job_data = data_frames["job_data"]
-# requisite_data = data_frames["requisite_data"]
-# welcome_data = data_frames["welcome_data"]
-# character_data = data_frames["character_data"]
-
-# print(requisite_data.columns)
+# 欠損値を空白で埋める処理
+data_frames = {name: df.fillna("") for name, df in data_frames.items()}
 
 
-# def preprocess_text(text, stopwords):
-#     # 小文字化（英語の場合）
-#     text = text.lower()
+# データフレームのアクセス
+job_data = data_frames["job_data"]
+requisite_data = data_frames["requisite_data"]
+welcome_data = data_frames["welcome_data"]
+character_data = data_frames["character_data"]
+
+def preprocess_text(text, stopwords):
+    # 小文字化（英語の場合）
+    text = text.lower()
     
-#     # 特殊文字を削除
-#     text = re.sub(r"[^a-zA-Z0-9\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff]", " ", text)
+    # 特殊文字を削除
+    text = re.sub(r"[^a-zA-Z0-9\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff]", " ", text)
     
-#     # 不要な空白を削除
-#     text = re.sub(r"\s+", " ", text).strip()
+    # 不要な空白を削除
+    text = re.sub(r"\s+", " ", text).strip()
     
-#     # MeCabを使った形態素解析
-#     mecab = MeCab.Tagger("-Owakati")
-#     tokens = mecab.parse(text).strip().split()
+    # MeCabを使った形態素解析
+    mecab = MeCab.Tagger("-Owakati")
+    tokens = mecab.parse(text).strip().split()
     
-#     # ストップワードを除去
-#     tokens = [word for word in tokens if word not in stopwords and len(word) > 1]
+    # ストップワードを除去
+    tokens = [word for word in tokens if word not in stopwords and len(word) > 1]
     
-#     return " ".join(tokens)
+    return " ".join(tokens)
 
-# # ストップワードの設定
-# stopwords = set(["の", "と", "して", "は", "ます", "です", "など"])
+# ストップワードの設定
+stopwords = set(["の", "と", "して", "は", "ます", "です", "など","たい","する","ある","いる","こと","これ","それ","あれ",
+                 "この", "その", "あり", "よう", "ため", "られる", "れる", "ている", "ている","ます","し","する","なる","こと","もの",
+                 "いくつか","いくつかの","いく","いける","頂きます","いただきます","いただく","頂く","対し","まで",
+                 "できる","から","のみ","なく","ところ","しか","いずれ",])
 
-# # テキストデータの前処理
-# job_data["仕事内容"] = job_data["仕事内容"].apply(lambda x: preprocess_text(str(x), stopwords))
-# requisite_data["必須条件"] = requisite_data["必須条件"].apply(lambda x: preprocess_text(str(x), stopwords))
-# welcome_data["歓迎条件"] = welcome_data["歓迎条件"].apply(lambda x: preprocess_text(str(x), stopwords))
-# character_data["求める人物像"] = character_data["求める人物像"].apply(lambda x: preprocess_text(str(x), stopwords))
+# テキストデータの前処理
+job_data["仕事内容"] = job_data["仕事内容"].apply(lambda x: preprocess_text(str(x), stopwords))
+requisite_data["必須条件"] = requisite_data["必須条件"].apply(lambda x: preprocess_text(str(x), stopwords))
+welcome_data["歓迎条件"] = welcome_data["歓迎条件"].apply(lambda x: preprocess_text(str(x), stopwords))
+character_data["求める人物像"] = character_data["求める人物像"].apply(lambda x: preprocess_text(str(x), stopwords))
 
-# # "processed_仕事内容" 列のみを新しいCSVファイルに保存
-# job_data[["仕事内容"]].to_csv("processed_job_data.csv", index=False, encoding="utf-8")
-# requisite_data[["必須条件"]].to_csv("processed_requite_data.csv", index=False, encoding="utf-8")
-# welcome_data[["歓迎条件"]].to_csv("processed_welcome_data.csv", index=False, encoding="utf-8")
-# character_data[["求める人物像"]].to_csv("processed_character_data.csv", index=False, encoding="utf-8")
+# "processed_仕事内容" 列のみを新しいCSVファイルに保存
+job_data[["仕事内容"]].to_csv("processed_job_data.csv", index=False, encoding="utf-8")
+requisite_data[["必須条件"]].to_csv("processed_requite_data.csv", index=False, encoding="utf-8")
+welcome_data[["歓迎条件"]].to_csv("processed_welcome_data.csv", index=False, encoding="utf-8")
+character_data[["求める人物像"]].to_csv("processed_character_data.csv", index=False, encoding="utf-8")
