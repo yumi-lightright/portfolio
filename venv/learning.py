@@ -22,7 +22,7 @@ try:
         password_input = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.NAME, "user[password]"))
         )
-        password_input.send_keys("kiyoko09")  # パスワードを入力
+        password_input.send_keys("Q8FxAv3fLVSN7a")  # パスワードを入力
 
         login_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.NAME, "commit"))
@@ -48,7 +48,7 @@ try:
             EC.presence_of_element_located((By.NAME, "user_search[keyword]"))
         )
         search_field.clear()
-        search_field.send_keys("業務効率化") # 検索ワードを入力
+        search_field.send_keys("AI") # 検索ワードを入力
         print("検索ワードを入力しました！")
 
         submit_button = WebDriverWait(driver, 10).until(
@@ -102,10 +102,13 @@ try:
             job_description = job_description_element.text
 
             skills_element = WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.XPATH, 
-             "//p[contains(@class, 'MuiTypography-body2') and (contains(., '必須') or contains(., '求める人物像') or contains(., '開発経験') or contains(., '歓迎条件') or contains(., '必要な資格'))]"
-         ))
-)
+            EC.presence_of_element_located(By.XPATH, 
+              "//p[contains(@class, 'MuiTypography-body2') and ("
+              "contains(., '必須') or contains(., '求める人物像') or contains(., '開発経験') or contains(., '歓迎条件') or "
+              "contains(., '必要な資格') or contains(., '自然言語処理') or contains(., 'マネジメント経験') or contains(., '統計学') or "
+              "contains(., '要件定義スキル') or contains(., '研究経験') or contains(., '求める人材') or contains(., 'システム開発を行った経験')"
+         ")]"))
+
 
             skills_description = skills_element.text
             print(f"仕事内容: {skills_description}")
@@ -117,7 +120,7 @@ try:
    # CSVファイルに分けて保存
     try:
         # リンクの保存
-        with open("links.csv", "w", newline="", encoding="utf-8") as link_file:
+        with open("csv/links.csv", "w", newline="", encoding="utf-8") as link_file:
             link_writer = csv.writer(link_file)
             link_writer.writerow(["リンク"])  # ヘッダー行
             for row in data_to_save:

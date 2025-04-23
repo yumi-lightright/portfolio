@@ -1,12 +1,14 @@
 import pandas as pd
 from collections import Counter
 import os
+import openai
+import json
 
 csv_files = {
-    "job_data": ("processed_job_data.csv", "仕事内容"),
-    "requisite_data": ("processed_requite_data.csv", "必須条件"),
-    "welcome_data": ("processed_welcome_data.csv", "歓迎条件"),
-    "character_data": ("processed_character_data.csv", "求める人物像")
+    "job_data": ("processed_csv/processed_job_data.csv", "仕事内容"),
+    "requisite_data": ("processed_csv/processed_requite_data.csv", "必須条件"),
+    "welcome_data": ("processed_processed_csv/welcome_data.csv", "歓迎条件"),
+    "character_data": ("processed_csv/processed_character_data.csv", "求める人物像")
 }
 
 word_counts_per_file = {}
@@ -63,3 +65,22 @@ print("\n全ファイル統合の単語頻度トップ15")
 for word, count in total_word_counts[:35]:  
     print(f"{word}: {count}")
 
+
+# # OpenAIで統計結果を入れ考察
+
+# openai.api_key = "YOUR_API_KEY"  # ここにOpenAIのAPIキーを設定
+
+# def analyze_text_with_gpt(text):
+#     response = openai.ChatCompletion.create(
+#         model="gpt-4",
+#         messages=[{"role": "system", "content": "以下の単語頻度データを分析し、傾向を考察してください。"},
+#                   {"role": "user", "content": text}]
+#     )
+#     return response["choices"][0]["message"]["content"]
+
+# # 統計データをJSON形式で変換
+# data_to_analyze = json.dumps(total_word_counts, ensure_ascii=False, indent=2)
+
+# # GPTに分析依頼
+# result = analyze_text_with_gpt(data_to_analyze)
+# print(result)
