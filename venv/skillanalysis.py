@@ -7,7 +7,7 @@ import json
 csv_files = {
     "job_data": ("processed_csv/processed_job_data.csv", "仕事内容"),
     "requisite_data": ("processed_csv/processed_requite_data.csv", "必須条件"),
-    "welcome_data": ("processed_processed_csv/welcome_data.csv", "歓迎条件"),
+    "welcome_data": ("processed_csv/processed_welcome_data.csv", "歓迎条件"),
     "character_data": ("processed_csv/processed_character_data.csv", "求める人物像")
 }
 
@@ -22,7 +22,7 @@ for name, file_info in csv_files.items():
             if column in df.columns:
                 texts = df[column].dropna().tolist()
                 word_counts = Counter(" ".join(texts).split())
-                word_counts_per_file[name] = word_counts.most_common(30)
+                word_counts_per_file[name] = word_counts.most_common(70)
             else:
                 print(f"'{file}' に '{column}' カラムが見つかりません")
         except Exception as e:
@@ -48,7 +48,7 @@ for name, file_info in csv_files.items():
             if column in df.columns:
                 texts = df[column].dropna().tolist()
                 words = " ".join(texts).split()
-                word_counts_per_file[name] = Counter(words).most_common(30)
+                word_counts_per_file[name] = Counter(words).most_common(50)
                 all_words.extend(words)  # 全体統計用リストに追加
             else:
                 print(f"'{file}' に '{column}' カラムが見つかりません")
@@ -58,12 +58,40 @@ for name, file_info in csv_files.items():
         print(f"ファイルが見つかりません、または無効なファイル名: {file}")
 
 # 全ファイル統計を計算
-total_word_counts = Counter(all_words).most_common(30)
+total_word_counts = Counter(all_words).most_common(100)
 
 # 全ファイル統計を表示（トップ15）
 print("\n全ファイル統合の単語頻度トップ15")  
-for word, count in total_word_counts[:35]:  
+for word, count in total_word_counts[:100]:  
     print(f"{word}: {count}")
+
+# #  言葉の分類
+
+# # サンプルの単語リスト
+# sentences = [
+#     ["機械学習", "深層学習", "AI", "データ", "開発", "設計", "Python", "LLM","deep learning"],
+#     ["法人営業", "コンサル", "提案", "マネジメント", "運用", "プロジェクト"],
+#     ["コミュニケーション", "積極", "チーム", "主体", "成長", "意欲"]
+# ]
+
+# # Word2Vecモデルを学習
+# model = Word2Vec(sentences, vector_size=100, window=5, min_count=1, sg=0)
+
+# # 単語リストを取得
+# words = list(model.wv.index_to_key)
+# vectors = [model.wv[word] for word in words]
+
+# # KMeansクラスタリング（3つのクラスタに分割）
+# num_clusters = 3
+# kmeans = KMeans(n_clusters=num_clusters, random_state=0)
+# kmeans.fit(vectors)
+
+# # クラスタごとの単語を表示
+# clusters = {i: [] for i in range(num_clusters)}
+# for word, label in zip(words, kmeans.labels_):
+#     clusters[label].append(word)
+
+# print(clusters)
 
 
 # # OpenAIで統計結果を入れ考察
@@ -71,7 +99,7 @@ for word, count in total_word_counts[:35]:
 # openai.api_key = "YOUR_API_KEY"  # ここにOpenAIのAPIキーを設定
 
 # def analyze_text_with_gpt(text):
-#     response = openai.ChatCompletion.create(
+#     response = openai.ChatCompletion.create(          
 #         model="gpt-4",
 #         messages=[{"role": "system", "content": "以下の単語頻度データを分析し、傾向を考察してください。"},
 #                   {"role": "user", "content": text}]
