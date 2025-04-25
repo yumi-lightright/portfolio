@@ -5,10 +5,10 @@ import openai
 import json
 
 csv_files = {
-    "job_data": ("processed_csv/processed_job_data.csv", "仕事内容"),
-    "requisite_data": ("processed_csv/processed_requite_data.csv", "必須条件"),
-    "welcome_data": ("processed_csv/processed_welcome_data.csv", "歓迎条件"),
-    "character_data": ("processed_csv/processed_character_data.csv", "求める人物像")
+    "仕事内容": ("processed_csv/processed_job_data.csv", "仕事内容"),
+    "必須スキル": ("processed_csv/processed_requite_data.csv", "必須条件"),
+    "歓迎スキル": ("processed_csv/processed_welcome_data.csv", "歓迎条件"),
+    "求める人物像": ("processed_csv/processed_character_data.csv", "求める人物像")
 }
 
 word_counts_per_file = {}
@@ -22,7 +22,7 @@ for name, file_info in csv_files.items():
             if column in df.columns:
                 texts = df[column].dropna().tolist()
                 word_counts = Counter(" ".join(texts).split())
-                word_counts_per_file[name] = word_counts.most_common(70)
+                word_counts_per_file[name] = word_counts.most_common(30)
             else:
                 print(f"'{file}' に '{column}' カラムが見つかりません")
         except Exception as e:
@@ -48,7 +48,7 @@ for name, file_info in csv_files.items():
             if column in df.columns:
                 texts = df[column].dropna().tolist()
                 words = " ".join(texts).split()
-                word_counts_per_file[name] = Counter(words).most_common(50)
+                word_counts_per_file[name] = Counter(words).most_common(0)
                 all_words.extend(words)  # 全体統計用リストに追加
             else:
                 print(f"'{file}' に '{column}' カラムが見つかりません")
