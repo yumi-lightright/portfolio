@@ -3,6 +3,9 @@ from collections import Counter
 import os
 import openai
 import json
+from dotenv import load_dotenv
+import os
+
 
 csv_files = {
     "仕事内容": ("processed_csv/processed_job_data.csv", "仕事内容"),
@@ -11,7 +14,9 @@ csv_files = {
     "求める人物像": ("processed_csv/processed_character_data.csv", "求める人物像")
 }
 
-word_counts_per_file = {}
+word_counts_per_file = {}  # 各カテゴリの頻度データ
+all_words = []  # 全ファイルの単語リスト
+
 
 for name, file_info in csv_files.items():
     file, column = file_info  # 明示的に分割してタプルではなく、個別の変数として扱う
@@ -23,6 +28,7 @@ for name, file_info in csv_files.items():
                 texts = df[column].dropna().tolist()
                 word_counts = Counter(" ".join(texts).split())
                 word_counts_per_file[name] = word_counts.most_common(30)
+                all_words.extend(word_counts)  # 全体統計用リストに追加
             else:
                 print(f"'{file}' に '{column}' カラムが見つかりません")
         except Exception as e:
@@ -37,8 +43,6 @@ for name, word_counts in word_counts_per_file.items():
     for word, count in word_counts:  
         print(f"{word}: {count}")
 
-word_counts_per_file = {}
-all_words = []  # すべてのファイルの単語を統合するリスト
 
 for name, file_info in csv_files.items():
     file, column = file_info  
@@ -65,50 +69,38 @@ print("\n全ファイル統合の単語頻度トップ15")
 for word, count in total_word_counts[:100]:  
     print(f"{word}: {count}")
 
-# #  言葉の分類
 
-# # サンプルの単語リスト
-# sentences = [
-#     ["機械学習", "深層学習", "AI", "データ", "開発", "設計", "Python", "LLM","deep learning"],
-#     ["法人営業", "コンサル", "提案", "マネジメント", "運用", "プロジェクト"],
-#     ["コミュニケーション", "積極", "チーム", "主体", "成長", "意欲"]
-# ]
-
-# # Word2Vecモデルを学習
-# model = Word2Vec(sentences, vector_size=100, window=5, min_count=1, sg=0)
-
-# # 単語リストを取得
-# words = list(model.wv.index_to_key)
-# vectors = [model.wv[word] for word in words]
-
-# # KMeansクラスタリング（3つのクラスタに分割）
-# num_clusters = 3
-# kmeans = KMeans(n_clusters=num_clusters, random_state=0)
-# kmeans.fit(vectors)
-
-# # クラスタごとの単語を表示
-# clusters = {i: [] for i in range(num_clusters)}
-# for word, label in zip(words, kmeans.labels_):
-#     clusters[label].append(word)
-
-# print(clusters)
+# openaiの考察
 
 
-# # OpenAIで統計結果を入れ考察
+load_dotenv()# .envファイルをロード
+openai.api_key = os.getenv("OPENAI_API_KEY")# OpenAI APIキーを環境変数から取得
+print(os.getenv("OPENAI_API_KEY"))  # 環境変数の中身を表示
 
-# openai.api_key = "YOUR_API_KEY"  # ここにOpenAIのAPIキーを設定
 
-# def analyze_text_with_gpt(text):
-#     response = openai.ChatCompletion.create(          
-#         model="gpt-4",
-#         messages=[{"role": "system", "content": "以下の単語頻度データを分析し、傾向を考察してください。"},
-#                   {"role": "user", "content": text}]
-#     )
-#     return response["choices"][0]["message"]["content"]
 
-# # 統計データをJSON形式で変換
-# data_to_analyze = json.dumps(total_word_counts, ensure_ascii=False, indent=2)
+def analyze_text_with_gpt(text):
+    try:
+        response = openai.chat.completions.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "120件の求人票の仕事内容、必須スキル、歓迎スキルと全体の合計の頻出ワードを取得したけど、仕事内容、必須スキル、歓迎スキル、全体の必須ワードごとの考察し、必要なスキルについて分析して欲しい"},
+                {"role": "user", "content": text}
+            ]
+        )
+        return response.choices[0].message.content
 
-# # GPTに分析依頼
-# result = analyze_text_with_gpt(data_to_analyze)
-# print(result)
+    except Exception as e:
+        return f"OpenAI APIの呼び出しでエラーが発生しました: {e}"
+
+
+# **GPTに渡すデータ構造**
+data_to_analyze = json.dumps({
+    "個別カテゴリー": word_counts_per_file,
+    "全体統計": total_word_counts
+}, ensure_ascii=False, indent=2)
+
+# GPTに分析依頼
+result = analyze_text_with_gpt(data_to_analyze)
+print("\nGPTによる分析結果:")
+print(result)
